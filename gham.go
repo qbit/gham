@@ -11,8 +11,6 @@ import (
 )
 
 
-// {
-
 func usage() {
 	fmt.Fprintf(os.Stderr, "usage: %s [callsign]\n", os.Args[0])
 	flag.PrintDefaults()
