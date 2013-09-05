@@ -52,7 +52,6 @@ func printJSON(d interface{}) {
 	}
 
 
-	fmt.Println(d)
 	a := d.(map[string]interface{})
 
 	for k, v := range a {
@@ -63,9 +62,11 @@ func printJSON(d interface{}) {
 				fmt.Println(x, ": ", vv)
 			}
 		// Need to iterate over rest of Licenses here
+		case map[string]interface{}: 
+			printJSON(vv)
 		case []interface{}:
-			for kk, vvv := range vv {
-				fmt.Println( kk, ": ", vvv)
+			for _, vvv := range vv {
+				printJSON(vvv)
 			}
 		}
 	}
