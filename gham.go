@@ -10,14 +10,13 @@ import (
 	"strings"
 )
 
-
 func usage() {
 	fmt.Fprintf(os.Stderr, "usage: %s [callsign]\n", os.Args[0])
 	flag.PrintDefaults()
 	os.Exit(2)
 }
 
-func getJSON(url string) (interface{}) {
+func getJSON(url string) interface{} {
 	resp, err := http.Get(url)
 
 	if err != nil {
@@ -40,17 +39,16 @@ func getJSON(url string) (interface{}) {
 
 func printJSON(d interface{}) {
 	m := map[string]string{
-		"lastUpdate": "Last Update",
-		"licName": "License Name",
-		"frn": "Federal Registration Number (FRN)",
-		"callsign": "Call Sign",
+		"lastUpdate":   "Last Update",
+		"licName":      "License Name",
+		"frn":          "Federal Registration Number (FRN)",
+		"callsign":     "Call Sign",
 		"categoryDesc": "Category Description",
-		"statusDesc": "License Status",
-		"expiredDate": "Date Expires",
-		"licenseID": "License ID",
+		"statusDesc":   "License Status",
+		"expiredDate":  "Date Expires",
+		"licenseID":    "License ID",
 		"licDetailURL": "FCC URL",
 	}
-
 
 	a := d.(map[string]interface{})
 
@@ -62,7 +60,7 @@ func printJSON(d interface{}) {
 				fmt.Println(x, ": ", vv)
 			}
 		// Need to iterate over rest of Licenses here
-		case map[string]interface{}: 
+		case map[string]interface{}:
 			printJSON(vv)
 		case []interface{}:
 			for _, vvv := range vv {
