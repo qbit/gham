@@ -59,7 +59,7 @@ func printJSON(d interface{}) {
 		switch vv := v.(type) {
 		case string:
 			if x, ok := m[k]; ok {
-				s = append(s, x+": "+vv+"\n")
+				s = append(s, "\x1b[32;1m"+x+"\x1b[0m"+": "+vv+"\n")
 			}
 		case map[string]interface{}:
 			printJSON(vv)
