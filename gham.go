@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"sort"
 	"strings"
 )
 
@@ -50,16 +51,16 @@ func printJSON(d interface{}) {
 		"licDetailURL": "FCC URL",
 	}
 
+	var s = make([]string, len(m))
+
 	a := d.(map[string]interface{})
 
 	for k, v := range a {
 		switch vv := v.(type) {
 		case string:
-			// only print if we have a field map
 			if x, ok := m[k]; ok {
-				fmt.Println(x, ": ", vv)
+				s = append(s, x+": "+vv+"\n")
 			}
-		// Need to iterate over rest of Licenses here
 		case map[string]interface{}:
 			printJSON(vv)
 		case []interface{}:
@@ -68,6 +69,9 @@ func printJSON(d interface{}) {
 			}
 		}
 	}
+
+	sort.Strings(s)
+	fmt.Println(strings.Join(s, ""))
 }
 
 func main() {
