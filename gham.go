@@ -51,7 +51,7 @@ func printJSON(d interface{}) {
 		"licDetailURL": "FCC URL",
 	}
 
-	var s = make([]string, len(m))
+	var s = make([]string, 0)
 
 	a := d.(map[string]interface{})
 
@@ -71,7 +71,7 @@ func printJSON(d interface{}) {
 	}
 
 	sort.Strings(s)
-	fmt.Println(strings.Join(s, ""))
+	fmt.Printf(strings.Join(s, ""))
 }
 
 func main() {
